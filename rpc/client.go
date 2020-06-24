@@ -108,6 +108,9 @@ type Client interface {
 	// GetBlockchainInfo return state info of blockchain
 	GetBlockchainInfo(ctx context.Context) (*types.BlockchainInfo, error)
 
+	////// Batch
+	BatchTransactions(ctx context.Context, batch []types.BatchTransactionItem) error
+
 	///// ckb-indexer
 	// GetCells returns the live cells collection by the lock or type script.
 	GetCells(ctx context.Context, searchKey *indexer.SearchKey, order indexer.SearchOrder, limit uint64, afterCursor string) (*indexer.LiveCells, error)
@@ -259,6 +262,10 @@ func (cli *client) TxPoolInfo(ctx context.Context) (*types.TxPoolInfo, error) {
 
 func (cli *client) GetBlockchainInfo(ctx context.Context) (*types.BlockchainInfo, error) {
 	return cli.ckb.GetBlockchainInfo(ctx)
+}
+
+func (cli *client) BatchTransactions(ctx context.Context, batch []types.BatchTransactionItem) error {
+	return cli.ckb.BatchTransactions(ctx, batch)
 }
 
 func (cli *client) GetCells(ctx context.Context, searchKey *indexer.SearchKey, order indexer.SearchOrder, limit uint64, afterCursor string) (*indexer.LiveCells, error) {
