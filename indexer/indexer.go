@@ -14,6 +14,9 @@ type Client interface {
 	// GetTransactions returns the transactions collection by the lock or type script.
 	GetTransactions(ctx context.Context, searchKey *SearchKey, order SearchOrder, limit uint64, afterCursor string) (*Transactions, error)
 
+	//GetTip returns the latest height processed by indexer
+	GetTip(ctx context.Context) (*TipHeader, error)
+
 	// Close close client
 	Close()
 }
@@ -68,4 +71,16 @@ func (cli *client) GetTransactions(ctx context.Context, searchKey *SearchKey, or
 		return nil, err
 	}
 	return toTransactions(result), err
+}
+
+func (cli *client) GetTip(ctx context.Context) (*TipHeader, error) {
+	var result tipHeader
+	err := cli.c.CallContext(ctx, &result, "get_tip")
+	if err != nil {
+		return nil, err
+	}
+	return &TipHeader{
+		BlockHash:   result.BlockHash,
+		BlockNumber: uint64(result.BlockNumber),
+	}, nil
 }

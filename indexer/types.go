@@ -52,6 +52,16 @@ type Transactions struct {
 	Objects    []*Transaction `json:"objects"`
 }
 
+type TipHeader struct {
+	BlockHash   types.Hash `json:"block_hash"`
+	BlockNumber uint64     `json:"block_number"`
+}
+
+type tipHeader struct {
+	BlockHash   types.Hash     `json:"block_hash"`
+	BlockNumber hexutil.Uint64 `json:"block_number"`
+}
+
 type searchKey struct {
 	Script     *script      `json:"script"`
 	ScriptType ScriptType   `json:"script_type"`

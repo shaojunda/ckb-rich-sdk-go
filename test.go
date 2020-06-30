@@ -12,13 +12,15 @@ import (
 )
 
 func main() {
-	c, err := rpc.Dial("http://localhost:8117/rpc", "http://localhost:8117/indexer")
+	c, err := rpc.Dial("http://localhost:8114", "http://localhost:8116")
 	if err != nil {
 		log.Fatalf("dial rpc error: %v", err)
 	}
 
-	blockNumber, _ := c.GetTipBlockNumber(context.Background())
-	fmt.Println(blockNumber)
+	blockNumber, _ := c.GetTip(context.Background())
+	fmt.Println(blockNumber.BlockNumber)
+	fmt.Println(blockNumber.BlockHash.String())
+	fmt.Println("--------------------")
 
 	args, _ := hex.DecodeString("c2baa1d5b45a3ad6452b9c98ad8e2cc52e5123c7")
 	searchKey := &indexer.SearchKey{
