@@ -2,9 +2,9 @@ package rpc
 
 import (
 	"context"
+
 	"github.com/ququzone/ckb-rich-sdk-go/indexer"
 	"github.com/ququzone/ckb-sdk-go/rpc"
-
 	"github.com/ququzone/ckb-sdk-go/types"
 )
 
@@ -114,6 +114,9 @@ type Client interface {
 	///// ckb-indexer
 	//GetTip returns the latest height processed by indexer
 	GetTip(ctx context.Context) (*indexer.TipHeader, error)
+
+	//GetCellsCapacity returns the live cells capacity by the lock or type script.
+	GetCellsCapacity(ctx context.Context, searchKey *indexer.SearchKey) (*indexer.Capacity, error)
 
 	// GetCells returns the live cells collection by the lock or type script.
 	GetCells(ctx context.Context, searchKey *indexer.SearchKey, order indexer.SearchOrder, limit uint64, afterCursor string) (*indexer.LiveCells, error)
@@ -273,6 +276,10 @@ func (cli *client) BatchTransactions(ctx context.Context, batch []types.BatchTra
 
 func (cli *client) GetTip(ctx context.Context) (*indexer.TipHeader, error) {
 	return cli.indexer.GetTip(ctx)
+}
+
+func (cli *client) GetCellsCapacity(ctx context.Context, searchKey *indexer.SearchKey) (*indexer.Capacity, error) {
+	return cli.indexer.GetCellsCapacity(ctx, searchKey)
 }
 
 func (cli *client) GetCells(ctx context.Context, searchKey *indexer.SearchKey, order indexer.SearchOrder, limit uint64, afterCursor string) (*indexer.LiveCells, error) {

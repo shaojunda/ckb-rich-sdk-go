@@ -17,11 +17,12 @@ func main() {
 		log.Fatalf("dial rpc error: %v", err)
 	}
 
-	blockNumber, _ := c.GetTip(context.Background())
-	fmt.Println(blockNumber.BlockNumber)
-	fmt.Println(blockNumber.BlockHash.String())
-	fmt.Println("--------------------")
+	fmt.Println("-------------------------- Get Tip ------------------------------")
+	tip, _ := c.GetTip(context.Background())
+	fmt.Println(tip.BlockNumber)
+	fmt.Println(tip.BlockHash.String())
 
+	fmt.Println("-------------------------- Get Cells Capacity ------------------------------")
 	args, _ := hex.DecodeString("c2baa1d5b45a3ad6452b9c98ad8e2cc52e5123c7")
 	searchKey := &indexer.SearchKey{
 		Script: &types.Script{
@@ -32,6 +33,12 @@ func main() {
 		ScriptType: indexer.ScriptTypeLock,
 	}
 
+	capacity, _ := c.GetCellsCapacity(context.Background(), searchKey)
+	fmt.Println(capacity.BlockNumber)
+	fmt.Println(capacity.BlockHash.String())
+	fmt.Println(capacity.Capacity)
+
+	fmt.Println("-------------------------- Get Cells ------------------------------")
 	// first page
 	liveCells, _ := c.GetCells(context.Background(), searchKey, indexer.SearchOrderAsc, 100, "")
 
@@ -47,7 +54,7 @@ func main() {
 	fmt.Println(liveCells.Objects[0].OutPoint.TxHash)
 	fmt.Println(liveCells.Objects[0].OutPoint.Index)
 
-	fmt.Println("-------------------------------------")
+	fmt.Println("-------------------------- Get Transactions ------------------------------")
 	transactions, _ := c.GetTransactions(context.Background(), searchKey, indexer.SearchOrderAsc, 100, "")
 	fmt.Println(transactions.LastCursor)
 	fmt.Println(len(transactions.Objects))

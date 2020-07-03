@@ -57,6 +57,18 @@ type TipHeader struct {
 	BlockNumber uint64     `json:"block_number"`
 }
 
+type Capacity struct {
+	Capacity    uint64     `json:"capacity"`
+	BlockHash   types.Hash `json:"block_hash"`
+	BlockNumber uint64     `json:"block_number"`
+}
+
+type capacity struct {
+	Capacity    hexutil.Uint64 `json:"capacity"`
+	BlockHash   types.Hash     `json:"block_hash"`
+	BlockNumber hexutil.Uint64 `json:"block_number"`
+}
+
 type tipHeader struct {
 	BlockHash   types.Hash     `json:"block_hash"`
 	BlockNumber hexutil.Uint64 `json:"block_number"`

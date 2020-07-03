@@ -2,8 +2,8 @@ package indexer
 
 import (
 	"context"
-	"github.com/ethereum/go-ethereum/common/hexutil"
 
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"github.com/ethereum/go-ethereum/rpc"
 )
 
@@ -16,6 +16,9 @@ type Client interface {
 
 	//GetTip returns the latest height processed by indexer
 	GetTip(ctx context.Context) (*TipHeader, error)
+
+	//GetCellsCapacity returns the live cells capacity by the lock or type script.
+	GetCellsCapacity(ctx context.Context, searchKey *SearchKey) (*Capacity, error)
 
 	// Close close client
 	Close()
@@ -80,6 +83,19 @@ func (cli *client) GetTip(ctx context.Context) (*TipHeader, error) {
 		return nil, err
 	}
 	return &TipHeader{
+		BlockHash:   result.BlockHash,
+		BlockNumber: uint64(result.BlockNumber),
+	}, nil
+}
+
+func (cli *client) GetCellsCapacity(ctx context.Context, searchKey *SearchKey) (*Capacity, error) {
+	var result capacity
+	err := cli.c.CallContext(ctx, &result, "get_cells_capacity", fromSearchKey(searchKey))
+	if err != nil {
+		return nil, err
+	}
+	return &Capacity{
+		Capacity:    uint64(result.Capacity),
 		BlockHash:   result.BlockHash,
 		BlockNumber: uint64(result.BlockNumber),
 	}, nil
