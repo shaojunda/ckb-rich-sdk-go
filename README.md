@@ -1,11 +1,11 @@
 ckb-rich-sdk-go
 ===============
 
-[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/ququzone/ckb-rich-sdk-go/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/shaojunda/ckb-rich-sdk-go/blob/master/LICENSE)
 [![Go version](https://img.shields.io/badge/go-1.11.5-blue.svg)](https://github.com/moovweb/gvm)
 [![Telegram Group](https://cdn.rawgit.com/Patrolavia/telegram-badge/8fe3382b/chat.svg)](https://t.me/nervos_ckb_dev)
 
-Golang SDK for Nervos rich [node](https://github.com/ququzone/ckb-rich-node).
+Golang SDK for Nervos rich [node](https://github.com/shaojunda/ckb-rich-node).
 
 ## Demos
 
@@ -18,9 +18,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ququzone/ckb-rich-sdk-go/indexer"
-	"github.com/ququzone/ckb-rich-sdk-go/rpc"
-	"github.com/ququzone/ckb-sdk-go/types"
+	"github.com/shaojunda/ckb-rich-sdk-go/indexer"
+	"github.com/shaojunda/ckb-rich-sdk-go/rpc"
+	"github.com/nervosnetwork/ckb-sdk-go/types"
 )
 
 func main() {

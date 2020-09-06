@@ -3,9 +3,9 @@ package rpc
 import (
 	"context"
 
-	"github.com/ququzone/ckb-rich-sdk-go/indexer"
-	"github.com/ququzone/ckb-sdk-go/rpc"
-	"github.com/ququzone/ckb-sdk-go/types"
+	"github.com/nervosnetwork/ckb-sdk-go/rpc"
+	"github.com/nervosnetwork/ckb-sdk-go/types"
+	"github.com/shaojunda/ckb-rich-sdk-go/indexer"
 )
 
 type Client interface {

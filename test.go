@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ququzone/ckb-rich-sdk-go/indexer"
-	"github.com/ququzone/ckb-rich-sdk-go/rpc"
-	"github.com/ququzone/ckb-sdk-go/types"
+	"github.com/nervosnetwork/ckb-sdk-go/types"
+	"github.com/shaojunda/ckb-rich-sdk-go/indexer"
+	"github.com/shaojunda/ckb-rich-sdk-go/rpc"
 )
 
 func main() {
