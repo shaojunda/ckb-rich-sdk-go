@@ -111,6 +111,9 @@ type Client interface {
 	////// Batch
 	BatchTransactions(ctx context.Context, batch []types.BatchTransactionItem) error
 
+	// Batch Live cells
+	BatchLiveCells(ctx context.Context, batch []types.BatchLiveCellItem) error
+
 	///// ckb-indexer
 	//GetTip returns the latest height processed by indexer
 	GetTip(ctx context.Context) (*indexer.TipHeader, error)
@@ -272,6 +275,10 @@ func (cli *client) GetBlockchainInfo(ctx context.Context) (*types.BlockchainInfo
 
 func (cli *client) BatchTransactions(ctx context.Context, batch []types.BatchTransactionItem) error {
 	return cli.ckb.BatchTransactions(ctx, batch)
+}
+
+func (cli *client) BatchLiveCells(ctx context.Context, batch []types.BatchLiveCellItem) error {
+	return cli.ckb.BatchLiveCells(ctx, batch)
 }
 
 func (cli *client) GetTip(ctx context.Context) (*indexer.TipHeader, error) {
